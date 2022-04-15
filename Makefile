@@ -2,3 +2,5 @@
 
 %:
 	$(MAKE) -C ../ $(MAKECMDGOALS)
+
+.PHONY: %
