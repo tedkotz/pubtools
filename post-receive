@@ -1,0 +1,7 @@
+#!/bin/sh
+umask 002
+export GIT_WORK_TREE=..
+git checkout -f
+git update-server-info
+cd $GIT_WORK_TREE
+make

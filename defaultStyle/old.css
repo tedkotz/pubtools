@@ -1,0 +1,252 @@
+* {
+	margin:0;
+	padding:0;
+	border:none;
+	outline:none;
+	text-decoration:inherit;
+	font:inherit;
+	vertical-align:baseline;
+	background:transparent;
+}
+
+strong, b {
+	font-weight: bold;
+}
+
+em, i {
+	font-style: italic;
+}
+
+/*	font: 1em "Lucida Sans Unicode", "Lucida Grande", sans-serif;	*/
+/*	font: 1em "Palatino Linotype", "Book Antiqua", Palatino, serif; */
+/*	font: 1em "Times New Roman", Times, serif; */
+
+body {
+    font: normal normal 1em "Trebuchet MS", Verdana, Helvetica, sans-serif;
+	text-decoration:none;
+	background-color: #FFF2E5;
+	padding: 0 5pc 0 3pc;
+}
+
+/* h0 */
+/* font-size: 2.5em; */
+
+
+h1 {
+	font-size: 2em;
+	margin: 1em 0 0 -1pc;
+}
+
+h2 {
+	font-size: 1.75em;
+	margin: 0.9em 0 0 -1pc;
+}
+
+h3 {
+	font-size: 1.5em;
+	margin: 0.8em 0 0 -1pc;
+}
+
+h4 {
+	font-size: 1.25em;
+	margin: 0.7em 0 0 -1pc;
+}
+
+h5 {
+	font-size: 1em;
+	font-weight: bold;
+	margin: 0.6em 0 0 -1pc;
+}
+
+h6 {
+	font-size: 1em;
+	font-style: italic;
+	margin: 0.5em 0 0 -1pc;
+}
+
+h1 + *, h2 + *, h3 + *, h4 + *, h5 + *, h6 + * {
+	margin-top: 0;
+}
+
+h1 + .right + *, h2 + .right + *, h3 + .right + *, h4 + .right + *, h5 + .right + *, h6 + .right + * {
+	margin-top: 0;
+}
+
+
+p {
+	margin: 0 0 1em 0;
+}
+
+a:link {
+	color: #000066;
+}
+
+a:visited {
+	color: #000066;
+}
+
+a:hover, a:active {
+	color: #000066;
+}
+
+
+pre {
+	background-color: #EEEEEE;
+	font: normal normal 1em "Lucida Console", Monaco, monospace;
+	white-space: pre-wrap;
+	padding: 20px;
+	border: 1px solid #EECCAA;
+}
+
+table + table {
+	margin-top: 1pc;
+}
+
+table {
+	border-color: #8C7054;
+	border-width: 1px;
+	border-style: none solid solid none;
+	border-collapse:collapse; 
+}
+
+td, th {
+	border-color: #8C7054;
+	border-width: 1px;
+	border-style: solid none none solid;
+	text-align: left;
+	padding: 1px 1ex 1px 1ex;
+	white-space: nowrap;
+}
+
+th {
+	background-color: #A68563;
+	color: #FFFFFF;
+	font-weight: bold;
+	vertical-align: bottom;
+}
+
+td {
+	vertical-align: top;
+}
+
+
+tr:nth-child(odd) td {
+  background-color: #F2E0CE;
+}
+
+tr:nth-child(even) td {
+  background-color: #FFF2E5;
+}
+
+tbody:not(:first-of-type) tr:nth-child(odd) td{
+  background-color: #FFF2E5;
+}
+
+tbody:not(:first-of-type) tr:nth-child(even) td{
+  background-color: #F2E0CE;
+}
+
+tbody:not(:first-of-type) tr:first-of-type td{
+	background-color: #A68563;
+	color: #FFFFFF;
+	font-weight: bold;
+	vertical-align: bottom;
+}
+
+/*
+td:last-of-type , th:last-of-type {
+	text-align: right;
+	padding-right:1em;
+}
+
+td:first-of-type , th:first-of-type {
+	text-align: left;
+	padding-left:1em;
+}
+*/
+
+
+
+/*
+.right {
+	float: right;
+	clear: right;
+	margin: 0 0 1em 1em;
+}
+
+h1 + table.right caption, h2 + table.right caption, h3 + table.right caption, h4 + table.right caption, h5 + table.right caption, h6 + table.right caption {
+	margin: 0 0 0 1em;
+}
+
+table.left {
+	float: left;
+	margin: 0 2em 1em 0;
+}
+
+table.list {
+	border: none;
+	width: auto;
+	margin-left: 2em;
+}
+
+table.list th {
+	background-color: transparent;
+	color: #000000;
+	vertical-align: top;
+	text-align: right;
+	border: none;
+	padding: 1px 0 1px 0;
+}
+
+table.list td {
+	vertical-align: top;
+	border: none;
+	white-space: normal;
+	background-color: transparent !important;
+}
+
+table.layout {
+	border: none;
+}
+
+table.layout td {
+	border: none;
+	white-space: normal;
+}
+*/
+
+ol>li{
+	list-style-type: decimal;
+	margin-left: 2em;
+}
+
+ol ol>li {
+	list-style-type: lower-alpha;
+	margin-left: 4em;
+}
+
+ol ol ol>li {
+	list-style-type: lower-roman;
+	margin-left: 6em;
+}
+
+ul>li{
+	list-style-type: disc;
+	margin-left: 2em;
+}
+
+ul ul>li {
+	list-style-type: square;
+	margin-left: 4em;
+}
+
+ul ul ul>li {
+	list-style-type: circle;
+	margin-left: 6em;
+}
+
+@media print {
+	body {
+		padding: 10px;
+	}
+}
