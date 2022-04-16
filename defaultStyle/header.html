@@ -4,23 +4,24 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
-  <link rel="stylesheet" type="text/css" href="modern.css" title="Modern" />
-  <link rel="alternate stylesheet" type="text/css" href="old.css" title="Old World" />
+  <link rel="stylesheet" type="text/css" href="REL_PATH_TO_TOP/style.css" title="Default Style" />
+  <link rel="alternate stylesheet" type="text/css" href="REL_PATH_TO_TOP/old.css" title="Old World" />
+  <link rel="alternate stylesheet" type="text/css" href="REL_PATH_TO_TOP/modern.css" title="Modern" />
   <title>MY_TITLE</title>
 </head>
 <body>
 
 <div id="header">
   <div id="upperheader">
-    <a id="banner" href="outline.html" title="Tyrfing Home">
-      <object type="image/jpeg" data="../images/dice_collage.jpg" width="100%">Tyrfing</object>
+    <a id="banner" href="REL_PATH_TO_TOP/" title="Tyrfing Home">
+      <object type="image/jpeg" data="REL_PATH_TO_TOP/images/banner.jpg" width="100%">Tyrfing</object>
     </a>
   </div> <!-- end upperheader -->
   <div id="navbar">
     <p class="hidecss"><a href="#content">Skip Quicknav</a></p>
     <ul>
       <li>
-	<form id="searchbox" method="get" action="http://google.com/search" onsubmit="q.value='site:www.tyrfing.org/rpg/dd/html/ '+search.value">
+	<form id="searchbox" method="get" action="http://google.com/search" onsubmit="q.value='site:'+window.location.origin+' '+search.value">
 	  <div>
 	    <input type="hidden" name="q" />
 	    <input type="text" name="search" value="" />
@@ -28,11 +29,11 @@
           </div>
 	</form>
       </li>
-      <li><a href="outline.html">Table of Contents</a></li>
-      <li><a href="../">Getting The System</a></li>
+      <li><a href="REL_PATH_TO_TOP/outline.html">Table of Contents</a></li>
+      <li><a href="REL_PATH_TO_TOP/../">Getting The System</a></li>
 <!--
-      <li><a href="./support">Support</a></li>
-      <li><a href="./devel/">Developers' Corner</a></li>
+      <li><a href="REL_PATH_TO_TOP/support">Support</a></li>
+      <li><a href="REL_PATH_TO_TOP/devel/">Developers' Corner</a></li>
 -->
       <li><a href="/">About Tyrfing</a></li>
     </ul>

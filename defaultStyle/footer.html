@@ -6,5 +6,71 @@
   </a>
 </div>
 
+<style type="text/css">
+  #table-of-contents {
+    border: 4px solid #DDEEFF;
+    margin-top: 1em;
+    padding: 0.5em 0.5em 0.5em 1.5em;
+    background: #fff;
+  }
+  #table-of-contents > li {
+    list-style-position: outside;
+  }
+  #table-of-contents .h2 {
+    margin-left: 1em;
+  }
+  #table-of-contents .h3 {
+    margin-left: 2em;
+  }
+
+  /* Desktop - TOC menu should float */
+  @media screen and (min-width: 800px) {
+    #table-of-contents {
+      position: fixed;
+      top: 100px;
+      right: 40px;
+      width: 200px;
+      margin: 0;
+    }
+    /* content makes room for floating menu, except tables */
+    #content > * {
+      margin-right:190px;
+    }
+    #content > table {
+      margin-right: 0;
+    }
+  }
+
+  @media print{
+    #table-of-contents {
+      display:none;
+    }
+  }
+
+</style>
+
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function() {
+    // Scan document for headings level 1-3, and creates a table of contents (floating on larger screens)
+    // containing links to all of the headers, and thus "sections" in the document.
+    let toc = document.createElement("menu")
+    toc.id = "table-of-contents"
+
+    document.querySelectorAll("h1,h2,h3").forEach(
+      function(headingElement) {
+        let menuLink = document.createElement("a")
+        menuLink.appendChild(document.createTextNode(headingElement.innerText))
+        menuLink.href = "#" + headingElement.id
+        let menuItem = document.createElement("li")
+        menuItem.appendChild(menuLink)
+        menuItem.classList.add(headingElement.tagName.toLowerCase())
+        toc.appendChild(menuItem)
+      }
+    )
+    // Insert TOC after page header
+    document.body.insertBefore(toc, document.getElementById("content"))
+  });
+</script>
+
 </body>
 </html>

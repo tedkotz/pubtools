@@ -3,7 +3,7 @@
 
 # Try to guess the correct number of jobs to launch by counting CPUs or default
 # to 2.
-MAKEFLAGS+="-j -l $(shell grep -c "^processor[[:space:]]*:[[:space:]]*[[:digit:]]*$" /proc/cpuinfo || echo 2 )"
+MAKEFLAGS+="-j -l $(shell grep -c "^processor[[:space:]]*:[[:space:]]*[[:digit:]]*$$" /proc/cpuinfo || echo 2 )"
 
 # Default markdown if not set
 # first try pandoc, then multimarkdown fall back to markdown
@@ -30,7 +30,7 @@ endif
 
 # Sensible defaults for input, output directories, style, and source extensions
 OUTDIR?=html
-SRC_EXT?= txt md
+SRC_EXT?=txt md
 SRCDIR?=text
 STYLE?=defaultStyle
 
@@ -39,6 +39,10 @@ SRCDIRS=$(shell find $(SRCDIR) -type d -print)
 OUTDIRS=$(patsubst $(SRCDIR)%,$(OUTDIR)%,$(SRCDIRS) )
 #SRC=$(foreach EXT,$(SRC_EXT),$(shell find $(SRCDIR) -type f -name "*.$(EXT)" -print))
 OUT=$(foreach EXT,$(SRC_EXT),$(patsubst $(SRCDIR)/%.$(EXT),$(OUTDIR)/%.html,$(shell find $(SRCDIR) -type f -name "*.$(EXT)" -print)))
+
+
+OUTDIRS+=$(patsubst $(COPYDIR)%,$(OUTDIR)/$(COPYDIR)%,$(shell find $(COPYDIR) -type d -print) )
+OUT+=$(patsubst $(COPYDIR)%,$(OUTDIR)/$(COPYDIR)%,$(shell find $(COPYDIR) -type f -print))
 
 
 #ifneq ("$(wildcard $(PATH_TO_FILE))","")
@@ -56,15 +60,14 @@ ifeq (, $(STYLEDIR))
 STYLEDIR=$(shell find . -maxdepth 3 -type d -name "$(STYLE)" -print| head -n 1)
 endif
 
-$(info Using Style Dir at $(STYLEDIR).)
-
 STYLESHEETS=$(shell find $(STYLEDIR) -type f -name "*.css" -print)
+STYLESHEET?=$(patsubst $(STYLEDIR)/%,%,$(firstword $(STYLESHEETS)))
+
+$(info Using StyleSheet at $(STYLEDIR)/$(STYLESHEET).)
 
 OUT+=$(patsubst $(STYLEDIR)/%,$(OUTDIR)/%,$(STYLESHEETS))
 
-$(info build targets $(OUT))
-
-#$(error ALL DONE)
+#$(info build targets $(OUT))
 
 
 # all is the first and therefore default rule.
@@ -77,19 +80,24 @@ $(OUTDIRS):
 	mkdir -p $(OUTDIRS)
 
 $(OUTDIR)/%.css: $(STYLEDIR)/%.css |$(OUTDIRS)
+	@echo "     CP $<"
 	cp $< $@
 
+$(OUTDIR)/$(COPYDIR)/%: $(COPYDIR)/% |$(OUTDIRS)
+	@echo "     CP $<"
+	cp $< $@
 
 define convert_rule
 $$(OUTDIR)/%.html: $$(SRCDIR)/%.$1 $$(STYLEDIR)/header.html $$(STYLEDIR)/footer.html |$$(OUTDIRS)
-	sed "s/MY_TITLE/$$(shell head -n 1 $$<)/" $$(STYLEDIR)/header.html > $$@
+	@echo "     MD $$<"
+	cp $$(STYLEDIR)/header.html $$@
 	$$(MD) $$(MD_FLAGS) $$< >> $$@
 	cat $$(STYLEDIR)/footer.html >> $$@
+	sed -i "s/MY_TITLE/$$(shell head -n 1 $$<)/; s+REL_PATH_TO_TOP+$$(shell realpath --relative-to $$(dir $$@) $$(OUTDIR))+" $$@
 
 endef
 
 $(foreach EXT,$(SRC_EXT),$(eval $(call convert_rule,$(EXT))))
-
 
 clean:
 	rm -f $(OUT)
@@ -105,3 +113,6 @@ install:
 
 uninstall:
 	rm .git/hooks/post-receive
+
+
+$V.SILENT:
