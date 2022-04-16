@@ -7,11 +7,55 @@
   <link rel="stylesheet" type="text/css" href="%REL_PATH_TO_TOP%/style.css" title="Default Style" />
   <link rel="alternate stylesheet" type="text/css" href="%REL_PATH_TO_TOP%/old.css" title="Old World" />
   <link rel="alternate stylesheet" type="text/css" href="%REL_PATH_TO_TOP%/modern.css" title="Modern" />
-  <link rel="icon" href="%REL_PATH_TO_TOP%/images/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="%REL_PATH_TO_TOP%/images/favicon.svg" type="image/svg+xml" />
 <!--
-  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.ico" sizes="any" />
   -->
   <title>%MY_TITLE%</title>
+
+  <style type="text/css">
+  #table-of-contents {
+    border: 4px solid #DDEEFF;
+    margin-top: 1em;
+    padding: 0.5em 0.5em 0.5em 1.5em;
+    background: #fff;
+  }
+  #table-of-contents > li {
+    list-style-position: outside;
+  }
+  #table-of-contents .h2 {
+    margin-left: 1em;
+  }
+  #table-of-contents .h3 {
+    margin-left: 2em;
+  }
+
+  /* Desktop - TOC menu should float */
+  @media screen and (min-width: 800px) {
+    #table-of-contents {
+      position: fixed;
+      top: 100px;
+      right: 40px;
+      width: 200px;
+      margin: 0;
+    }
+    /* content makes room for floating menu, except tables */
+    #content > * {
+      margin-right:190px;
+    }
+    #content > table {
+      margin-right: 0;
+    }
+  }
+
+  @media print{
+    #table-of-contents {
+      display:none;
+    }
+  }
+
+  </style>
+
 </head>
 <body>
 
