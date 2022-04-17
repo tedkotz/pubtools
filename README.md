@@ -16,7 +16,7 @@ Clone example
 ### TODO
 - [ ] Import from recipes
 - [ ] Import from projects
-- [ ] Import fro rpg
+- [ ] Import from rpg
 - [ ] align simple framework
 - [ ] update readme to show how to use it
 - [ ] add permission clean
