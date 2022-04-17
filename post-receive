@@ -1,5 +1,6 @@
 #!/bin/sh
 umask 002
+pwd
 export GIT_WORK_TREE=..
 git submodule update --remote
 git checkout -f --recurse-submodules
