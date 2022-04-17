@@ -27,4 +27,7 @@ Clone example
 - [ ] custom stylesheet
 - [ ] plantuml image support
 - [X] markdown support
+- [ ] Index Box can scroll above Titlebar
+- [ ] On page named Table of contents 2 index boxes are created.
+
 

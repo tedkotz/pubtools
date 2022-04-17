@@ -45,6 +45,8 @@ OUTDIR?=html
 SRC_EXT?=txt md
 SRCDIR?=text
 STYLE?=defaultStyle
+TOCFILE?=toc.html
+PUBTOOLS?=pubtools
 
 # Search subfolders for resources
 SRCDIRS:=$(shell find $(SRCDIR) -type d -print)
@@ -73,9 +75,8 @@ STYLEDIR:=$(shell find . -maxdepth 3 -type d -name "$(STYLE)" -print| head -n 1)
 endif
 
 STYLESHEETS:=$(shell find $(STYLEDIR) -type f -name "*.css" -print)
-STYLESHEET?=$(patsubst $(STYLEDIR)/%,%,$(firstword $(STYLESHEETS)))
 
-$(info Using StyleSheet at $(STYLEDIR)/$(STYLESHEET).)
+$(info Using Style at $(STYLEDIR).)
 
 OUT+=$(patsubst $(STYLEDIR)/%,$(OUTDIR)/%,$(STYLESHEETS))
 
@@ -83,7 +84,7 @@ OUT+=$(patsubst $(STYLEDIR)/%,$(OUTDIR)/%,$(STYLESHEETS))
 
 
 # all is the first and therefore default rule.
-all: $(OUT)
+all: $(OUT) $(OUTDIR)/$(TOCFILE)
 	# Done.
 
 .PHONY: all clean clobber install uninstall
@@ -98,6 +99,18 @@ $(OUTDIR)/%.css: $(STYLEDIR)/%.css |$(OUTDIRS)
 $(OUTDIR)/$(COPYDIR)/%: $(COPYDIR)/% |$(OUTDIRS)
 	@echo "     CP $<"
 	cp $< $@
+
+$(OUTDIR)/$(TOCFILE): |$(OUT)
+	@echo "     TOC $@"
+	cp $(STYLEDIR)/header.html $@
+	find html/ -iname "*.html" -printf "%P\n" | sort | xargs $(PUBTOOLS)/create_toc.py -o $@
+	cat $(STYLEDIR)/footer.html >> $@
+	sed -i "s+%MY_TITLE%+$(shell head -n 1 $<)+; s+%REL_PATH_TO_TOP%+$(shell realpath --relative-to $(dir $@) $(OUTDIR))+; s+^%+%+" $@
+ifneq (None, $(MINIFY))
+	$(MINIFY) $(MINIFY_FLAGS) -o $@ $@
+endif
+
+
 
 define convert_rule
 $$(OUTDIR)/%.html: $$(SRCDIR)/%.$1 $$(STYLEDIR)/header.html $$(STYLEDIR)/footer.html |$$(OUTDIRS)
