@@ -1,7 +1,9 @@
 #!/bin/sh
 umask 002
 export GIT_WORK_TREE=..
+git submodule update --remote
 git checkout -f --recurse-submodules
 git update-server-info
+#git submodule update --init --recursive
 cd $GIT_WORK_TREE
 make
