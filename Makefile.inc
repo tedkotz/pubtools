@@ -49,11 +49,16 @@ TOCFILE?=toc.html
 PUBTOOLS?=pubtools
 
 # Search subfolders for resources
+#SRC=$(foreach EXT,$(SRC_EXT),$(shell find $(SRCDIR) -type f -name "*.$(EXT)" -print))
+ifeq (., $(SRCDIR))
+SRCDIRS?=text
+OUTDIRS:=$(patsubst %,$(OUTDIR)/%,$(SRCDIRS) )
+OUT:=$(foreach EXT,$(SRC_EXT),$(patsubst %.$(EXT),$(OUTDIR)/%.html,$(shell find $(SRCDIRS) -type f -name "*.$(EXT)" -print)))
+else
 SRCDIRS:=$(shell find $(SRCDIR) -type d -print)
 OUTDIRS:=$(patsubst $(SRCDIR)%,$(OUTDIR)%,$(SRCDIRS) )
-#SRC=$(foreach EXT,$(SRC_EXT),$(shell find $(SRCDIR) -type f -name "*.$(EXT)" -print))
-OUT:=$(foreach EXT,$(SRC_EXT),$(patsubst $(SRCDIR)/%.$(EXT),$(OUTDIR)/%.html,$(shell find $(SRCDIR) -type f -name "*.$(EXT)" -print)))
-
+OUT:=$(foreach EXT,$(SRC_EXT),$(patsubst $(SRCDIR)/%.$(EXT),$(OUTDIR)/%.html,$(shell find $(SRCDIRS) -type f -name "*.$(EXT)" -print)))
+endif
 
 OUTDIRS+=$(patsubst $(COPYDIR)%,$(OUTDIR)/$(COPYDIR)%,$(shell find $(COPYDIR) -type d -print) )
 OUT+=$(patsubst $(COPYDIR)%,$(OUTDIR)/$(COPYDIR)%,$(shell find $(COPYDIR) -type f -print))
@@ -80,9 +85,6 @@ $(info Using Style at $(STYLEDIR).)
 
 OUT+=$(patsubst $(STYLEDIR)/%,$(OUTDIR)/%,$(STYLESHEETS))
 
-#$(info build targets $(OUT))
-
-
 # all is the first and therefore default rule.
 all: $(OUT)
 	# Done.
@@ -100,14 +102,20 @@ $(OUTDIR)/$(COPYDIR)/%: $(COPYDIR)/% |$(OUTDIRS)
 	@echo "     CP $<"
 	cp $< $@
 
-$(OUTDIR)/$(TOCFILE): |$(OUT)
+
+ifneq (None, $(TOCFILE))
+all: $(OUT) $(OUTDIR)/$(TOCFILE)
+
+$(OUTDIR)/$(TOCFILE): $(OUT)
 	@echo "     TOC $@"
 	cp $(STYLEDIR)/header.html $@
-	find html/ -iname "*.html" -printf "%P\n" | sort | xargs $(PUBTOOLS)/create_toc.py -o $@
+	find $(OUTDIR) -iname "*.html" -printf "%P\n" | grep -v "$(TOCFILE)" | sort | $(PUBTOOLS)/create_toc.py -b "$(OUTDIR)/" - >> $@
 	cat $(STYLEDIR)/footer.html >> $@
 	sed -i "s+%MY_TITLE%+$(shell head -n 1 $<)+; s+%REL_PATH_TO_TOP%+$(shell realpath --relative-to $(dir $@) $(OUTDIR))+; s+^%+%+" $@
 ifneq (None, $(MINIFY))
 	$(MINIFY) $(MINIFY_FLAGS) -o $@ $@
+endif
+
 endif
 
 
@@ -144,3 +152,10 @@ uninstall:
 
 
 $V.SILENT:
+
+# Debug Block can be uncomment to inspect inner workings.
+#
+#$(info build dirs $(OUTDIRS))
+#$(info build targets $(OUT))
+#$(error Stopped after first pass.)
+

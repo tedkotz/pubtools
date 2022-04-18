@@ -14,17 +14,17 @@ Clone example
 
 
 ### TODO
-- [ ] Import from recipes
+- [x] Import from recipes
 - [ ] Import from projects
 - [ ] Import from rpg
-- [ ] align simple framework
+- [x] align simple framework
 - [ ] update readme to show how to use it
 - [ ] add permission clean
-- [ ] add auto generate TOC
+- [x] add auto generate TOC
 - [ ] autobuild index.html if not present
-- [ ] subdirectory support
-- [ ] allow customization of header and footer
-- [ ] custom stylesheet
+- [x] subdirectory support
+- [x] allow customization of header and footer
+- [x] custom stylesheet
 - [ ] plantuml image support
 - [X] markdown support
 - [ ] Index Box can scroll above Titlebar
