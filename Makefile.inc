@@ -84,7 +84,7 @@ OUT+=$(patsubst $(STYLEDIR)/%,$(OUTDIR)/%,$(STYLESHEETS))
 
 
 # all is the first and therefore default rule.
-all: $(OUT) $(OUTDIR)/$(TOCFILE)
+all: $(OUT)
 	# Done.
 
 .PHONY: all clean clobber install uninstall
