@@ -89,8 +89,6 @@ OUT+=$(patsubst $(STYLEDIR)/%,$(OUTDIR)/%,$(STYLESHEETS))
 all: $(OUT)
 	# Done.
 
-.PHONY: all clean clobber install uninstall
-
 $(OUTDIRS):
 	mkdir -p $(OUTDIRS)
 
@@ -101,23 +99,6 @@ $(OUTDIR)/%.css: $(STYLEDIR)/%.css |$(OUTDIRS)
 $(OUTDIR)/$(COPYDIR)/%: $(COPYDIR)/% |$(OUTDIRS)
 	@echo "     CP $<"
 	cp $< $@
-
-
-ifneq (None, $(TOCFILE))
-all: $(OUT) $(OUTDIR)/$(TOCFILE)
-
-$(OUTDIR)/$(TOCFILE): $(OUT)
-	@echo "     TOC $@"
-	cp $(STYLEDIR)/header.html $@
-	find $(OUTDIR) -iname "*.html" -printf "%P\n" | grep -v "$(TOCFILE)" | sort | $(PUBTOOLS)/create_toc.py -b "$(OUTDIR)/" - >> $@
-	cat $(STYLEDIR)/footer.html >> $@
-	sed -i "s+%MY_TITLE%+$(shell head -n 1 $<)+; s+%REL_PATH_TO_TOP%+$(shell realpath --relative-to $(dir $@) $(OUTDIR))+; s+^%+%+" $@
-ifneq (None, $(MINIFY))
-	$(MINIFY) $(MINIFY_FLAGS) -o $@ $@
-endif
-
-endif
-
 
 
 define convert_rule
@@ -149,6 +130,25 @@ install:
 
 uninstall:
 	rm .git/hooks/post-receive
+
+
+ifneq (None, $(TOCFILE))
+all: $(OUT) $(OUTDIR)/$(TOCFILE)
+
+$(OUTDIR)/$(TOCFILE): $(OUT) $(STYLEDIR)/header.html $(STYLEDIR)/footer.html
+	@echo "     TOC $@"
+	cp $(STYLEDIR)/header.html $@
+	find $(OUTDIR) -iname "*.html" -printf "%P\n" | grep -v "$(TOCFILE)" | sort | $(PUBTOOLS)/create_toc.py -b "$(OUTDIR)/" - >> $@
+	cat $(STYLEDIR)/footer.html >> $@
+	sed -i "s+%MY_TITLE%+Table of Contents+; s+%REL_PATH_TO_TOP%+$(shell realpath --relative-to $(dir $@) $(OUTDIR))+; s+^%+%+" $@
+ifneq (None, $(MINIFY))
+	$(MINIFY) $(MINIFY_FLAGS) -o $@ $@
+endif
+
+endif
+
+
+.PHONY: all clean clobber install uninstall
 
 
 $V.SILENT:

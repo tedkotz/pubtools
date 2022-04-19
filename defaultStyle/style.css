@@ -1,7 +1,7 @@
 *{
  margin:0;
  padding:0;
- border:none; 
+ border:none;
  outline:none;
  text-decoration:inherit;
  text-align:inherit;
@@ -24,9 +24,9 @@ body{
  text-align:left;
  background-color:#FCFFFF;
  padding:0 2em;
- max-width:80%; 
- min-width:50em; 
- margin:0 auto 1em auto; 
+ max-width:80%;
+ /* min-width:50em; */
+ margin:0 auto 1em auto;
 }
 
 hr{
@@ -162,7 +162,7 @@ tbody:not(:first-of-type) tr:first-of-type td{
 }
 
 dt{
- font-weight:bold;  
+ font-weight:bold;
 }
 
 dt:after{
@@ -179,7 +179,7 @@ li{
 }
 
 li li{
- margin-left:2em; 
+ margin-left:2em;
 }
 
 li>p{
@@ -225,14 +225,14 @@ ul ul ul ul>li{
 
 #navbar{
  margin:0 -1em;
- padding:1px 1em;
+ padding:5px 1em;
  background-color:#DDEEFF;
  font-weight:bold;
-} 
+}
 
 #navbar ul{
  list-style-type:none;
-} 
+}
 
 #navbar li{
  display:inline;
@@ -254,7 +254,7 @@ ul ul ul ul>li{
 }
 
 #searchbox input[type=text]{
- background-color:#FFFFFF;  
+ background-color:#FFFFFF;
  font-weight:normal;
 }
 
@@ -265,7 +265,7 @@ ul ul ul ul>li{
 @media print{
  body{
   background-color:white;
-  margin:auto; 
+  margin:auto;
  }
  #header{
   display:none;
