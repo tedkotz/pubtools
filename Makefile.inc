@@ -126,7 +126,7 @@ clobber:
 install:
 	git config receive.denyCurrentBranch ignore
 	ln -sf ../../$(PUBTOOLS)/post-receive .git/hooks/
-	.git/hooks/post-receive
+	cd .git; ./hooks/post-receive
 
 uninstall:
 	rm .git/hooks/post-receive

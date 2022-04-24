@@ -90,7 +90,7 @@ def extractTitleFromHtml(filename):
 
 def getFileTitle(path, filename):
     title = extractTitleFromHtml(path + filename)
-    if title is None:
+    if (title is None) or ("" == title):
         return prettyPrintFilenameToString(filename)
     else:
         return title
