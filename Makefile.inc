@@ -111,7 +111,7 @@ $$(OUTDIR)/%.html: $$(SRCDIR)/%.$1 $$(STYLEDIR)/header.html $$(STYLEDIR)/footer.
 	cp $$(STYLEDIR)/header.html $$@
 	$$(MD) $$(MD_FLAGS) $$< >> $$@
 	cat $$(STYLEDIR)/footer.html >> $$@
-	sed -i "s+%MY_TITLE%+$$(shell head -n 1 $$<)+; s+%REL_PATH_TO_TOP%+$$(shell realpath --relative-to $$(dir $$@) $$(OUTDIR))+; s+^%+%+" $$@
+	sed -i "s+%MY_TITLE%+$$(shell head -n 1 $$<)+; s+plantuml-images/+%REL_PATH_TO_TOP%/../plantuml-images/+; s+%REL_PATH_TO_TOP%+$$(shell realpath --relative-to $$(dir $$@) $$(OUTDIR))+; s+^%+%+" $$@
 ifneq (None, $(MINIFY))
 	$$(MINIFY) $$(MINIFY_FLAGS) -o $$@ $$@
 endif
