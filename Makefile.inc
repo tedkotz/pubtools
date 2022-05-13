@@ -42,7 +42,7 @@ endif
 
 # Sensible defaults for input, output directories, style, and source extensions
 OUTDIR?=html
-SRC_EXT?=txt md
+SRC_EXT?=txt md html
 SRCDIR?=text
 STYLE?=defaultStyle
 TOCFILE?=toc.html
@@ -91,6 +91,10 @@ all: $(OUT)
 
 $(OUTDIRS):
 	mkdir -p $(OUTDIRS)
+
+$(OUTDIR)/%.html: $(SRCDIR)/%.html |$(OUTDIRS)
+	@echo "     CP $<"
+	cp $< $@
 
 $(OUTDIR)/%.css: $(STYLEDIR)/%.css |$(OUTDIRS)
 	@echo "     CP $<"
