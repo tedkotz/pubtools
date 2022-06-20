@@ -1,3 +1,17 @@
+/*
+ * Simple modern style Based on the following color palette
+ *
+ * Primary
+ *  White: #FFFFFF
+ *  Black: #000000
+ *  Light Blue: #CCDDFF
+ *  Dark Blue: #003399
+ * Secondary:
+ *  Red: #CC0000
+ *  Dark Red: #990000
+ *  purple: #800080
+ *  blue: #0000FF
+ */
 *{
  margin:0;
  padding:0;
@@ -8,6 +22,7 @@
  font:inherit;
  vertical-align:baseline;
  background:transparent;
+ background-color:transparent;
 }
 
 strong,b{
@@ -22,7 +37,7 @@ body{
  font:normal normal normal 100% sans-serif;
  text-decoration:none;
  text-align:left;
- background-color:#FCFFFF;
+ background-color:#FFFFFF;
  padding:0 2em;
  max-width:80%;
  /* min-width:50em; */
@@ -39,34 +54,34 @@ hr{
 
 h1{
  font-size:2em;
+ color: #003399;
  margin:1em 0 0 -1em;
 }
 
 h2{
  font-size:1.78em;
- color: #8888FF;
  margin:1em 0 0 -0.9em;
 }
 
 h3{
  font-size:1.59em;
+ color: #003399;
  margin:1em 0 0 -0.8em;
 }
 
 h4{
  font-size:1.41em;
- color: #8888FF;
  margin:1em 0 0 -0.7em;
 }
 
 h5{
  font-size:1.26em;
+ color: #003399;
  margin:1em 0 0 -0.6em;
 }
 
 h6{
  font-size:1.12em;
- color: #8888FF;
  margin:1em 0 0 -0.5em;
 }
 
@@ -83,16 +98,23 @@ p{
  text-align:justify;
 }
 
-a:link{
- color:#000066;
+a {
+ text-decoration:none;
+ color:blue;
+ background:none;
 }
 
-a:visited{
- color:#330033;
+a:visited {
+ color:purple;
 }
 
-a:hover,a:active{
- color:#0000FF;
+a:active {
+ color:red;
+}
+
+a:hover,
+a:focus {
+ text-decoration:underline
 }
 
 a.footnote{
@@ -101,11 +123,11 @@ a.footnote{
 }
 
 pre{
- background-color:#EEEEEE;
+ background-color:#CCDDFF;
  font:normal normal normal 100% monospace;
  white-space:pre;
  padding:2em;
- border:1px solid #222222;
+ border:1px solid #003399;
 }
 
 table+table{
@@ -147,7 +169,7 @@ td{
 }
 
 tr:nth-child(odd) td{
- background-color:#DDEEFF;
+ background-color:#CCDDFF;
 }
 
 tr:nth-child(even) td{
@@ -159,7 +181,7 @@ tbody:not(:first-of-type) tr:nth-child(odd) td{
 }
 
 tbody:not(:first-of-type) tr:nth-child(even) td{
- background-color:#DDEEFF;
+ background-color:#CCDDFF;
 }
 
 tbody:not(:first-of-type) tr:first-of-type td{
@@ -233,7 +255,7 @@ ul ul ul ul>li{
 #navbar{
  margin:0 -1em;
  padding:5px 1em;
- background-color:#DDEEFF;
+ background-color:#CCDDFF;
  font-weight:bold;
 }
 
