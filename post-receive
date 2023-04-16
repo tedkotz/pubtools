@@ -6,6 +6,6 @@ umask 002
 #git submodule update
 git checkout -f
 git update-server-info
-git submodule update --init --recursive
+git submodule update --init --recursive -f
 cd ..
 make
