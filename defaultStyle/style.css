@@ -5,7 +5,7 @@
  *  White: #FFFFFF
  *  Black: #000000
  *  Light Blue: #CCDDFF
- *  Dark Blue: #003399
+ *  Dark Blue: #000088
  * Secondary:
  *  Red: #CC0000
  *  Dark Red: #990000
@@ -17,29 +17,20 @@
  padding:0;
  border:none;
  outline:none;
- text-decoration:inherit;
- text-align:inherit;
- font:inherit;
  vertical-align:baseline;
- background:transparent;
- background-color:transparent;
+ background:none;
 }
 
-strong,b{
- font-weight:bold;
-}
-
-em,i{
- font-style:italic;
-}
-
-body{
+body,html {
  font:normal normal normal 100% sans-serif;
+}
+
+body {
  text-decoration:none;
  text-align:left;
  background-color:#FFFFFF;
  padding:0 2em;
- max-width:80%;
+ /* max-width:80%;  */
  /* min-width:50em; */
  margin:0 auto 1em auto;
 }
@@ -53,44 +44,59 @@ hr{
 }
 
 h1{
- font-size:2em;
- color: #003399;
- margin:1em 0 0 -1em;
+ font-family:'Linux Libertine',Georgia,Times,serif;
+ font-size:1.8rem;
+ margin-left: -1.5rem;
+ width: calc( 100% + 1.5rem);
+ margin-bottom: 0.25em;
+ border-bottom: 3px double #000000;
 }
 
 h2{
- font-size:1.78em;
- margin:1em 0 0 -0.9em;
+ font-family:'Linux Libertine',Georgia,Times,serif;
+ font-size:1.8rem;
+ margin-left: -1.25rem;
+ width: calc( 100% + 1.25rem);
+ margin-bottom: 0.25em;
+ border-bottom: 1px solid #000088;
 }
 
 h3{
- font-size:1.59em;
- color: #003399;
- margin:1em 0 0 -0.8em;
+ font-family:'Linux Libertine',Georgia,Times,serif;
+ font-size:1.5rem;
+ margin-left: -1rem;
 }
 
 h4{
- font-size:1.41em;
- margin:1em 0 0 -0.7em;
+ font-family:'Linux Libertine',Georgia,Times,serif;
+ font-size:1.5rem;
+ margin-left: -0.75rem;
 }
 
 h5{
- font-size:1.26em;
- color: #003399;
- margin:1em 0 0 -0.6em;
+ font-size:1.2rem;
+ margin-left: -0.5rem;
 }
 
 h6{
- font-size:1.12em;
- margin:1em 0 0 -0.5em;
+ font-size:1.2rem;
+ margin-left: -0.25rem;
 }
 
-h1,h2,h3,h4,h5,h6{
+h2,h4,h6 {
+ color: #000088;
+}
+
+h1,h2,h3,h4,h5,h6 {
  font-weight:bold;
+ page-break-after: avoid;
+ margin-top: 0.3em;
+ padding-top: 0.5em;
 }
 
 h1+*,h2+*,h3+*,h4+*,h5+*,h6+*{
- margin-top:0;
+ page-break-before: avoid;
+ margin-top:1pt;
 }
 
 p{
@@ -100,16 +106,6 @@ p{
 
 a {
  text-decoration:none;
- color:blue;
- background:none;
-}
-
-a:visited {
- color:purple;
-}
-
-a:active {
- color:red;
 }
 
 a:hover,
@@ -117,8 +113,8 @@ a:focus {
  text-decoration:underline
 }
 
-a.footnote{
- font-size:50%;
+a.footnote, a.footnote-ref, sup{
+ font-size: 0.6rem;
  vertical-align:super;
 }
 
@@ -126,8 +122,8 @@ pre{
  background-color:#CCDDFF;
  font:normal normal normal 100% monospace;
  white-space:pre;
- padding:2em;
- border:1px solid #003399;
+ padding:1em;
+ border:1px solid #000088;
 }
 
 table+table{
@@ -135,8 +131,9 @@ table+table{
 }
 
 table{
+ table-layout: auto;
  border-collapse:collapse;
- min-width:50%;
+ min-width:45%;
 }
 
 caption{
@@ -158,36 +155,31 @@ td:first-of-type,th:first-of-type{
  padding-left:1em;
 }
 
-th{
- font-weight:bold;
- vertical-align:bottom;
-}
-
 td{
- vertical-align:top;
- word-wrap:normal;
+ vertical-align:middle;
+ white-space:normal;
+ height: 1.25rem;
 }
 
-tr:nth-child(odd) td{
- background-color:#CCDDFF;
-}
-
-tr:nth-child(even) td{
- background-color:transparent;
-}
-
-tbody:not(:first-of-type) tr:nth-child(odd) td{
- background-color:transparent;
-}
-
-tbody:not(:first-of-type) tr:nth-child(even) td{
- background-color:#CCDDFF;
-}
-
+th,
+thead td,
 tbody:not(:first-of-type) tr:first-of-type td{
  height:2em;
  font-weight:bold;
  vertical-align:bottom;
+ background-color:transparent;
+}
+
+tr.odd td,
+tr:nth-child(odd) td,
+tbody:not(:first-of-type) tr:nth-child(even) td{
+ background-color:#CCDDFF;
+}
+
+tr.even td,
+tr:nth-child(even) td,
+tbody:not(:first-of-type) tr:nth-child(2n+1) td{
+ background-color:transparent;
 }
 
 dt{
@@ -228,6 +220,10 @@ ol ol ol>li{
 }
 
 ol ol ol ol>li{
+ list-style-type:lower-greek;
+}
+
+ol ol ol ol ol>li{
  list-style-type:decimal;
 }
 
@@ -244,7 +240,7 @@ ul ul ul>li{
 }
 
 ul ul ul ul>li{
- list-style-type:none;
+ list-style-type:"- ";
 }
 
 #upperheader{
